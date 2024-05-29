@@ -7,9 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/nest')],
-  controllers: [ProductsController],
-  providers: [ProductsService],
+  imports: [MongooseModule.forRoot('mongodb://0.0.0.0:27017/nest'),ProductsModule],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) { //acesso aos request e response 

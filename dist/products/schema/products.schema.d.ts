@@ -23,26 +23,15 @@
 /// <reference types="mongoose/types/virtuals" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
-import { Product } from './entities/product.entity';
-import { Model } from 'mongoose';
-export declare class ProductsService {
-    private productModel;
-    constructor(productModel: Model<Product>);
-    create(createProductDto: CreateProductDto): Promise<import("mongoose").Document<unknown, {}, Product> & Product & Required<{
-        _id: unknown;
-    }>>;
-    findAll(): Promise<(import("mongoose").Document<unknown, {}, Product> & Product & Required<{
-        _id: unknown;
-    }>)[]>;
-    findOne(id: number): Promise<import("mongoose").Document<unknown, {}, Product> & Product & Required<{
-        _id: unknown;
-    }>>;
-    update(id: number, updateProductDto: UpdateProductDto): Promise<import("mongoose").Document<unknown, {}, Product> & Product & Required<{
-        _id: unknown;
-    }>>;
-    remove(id: number): import("mongoose").Query<import("mongodb").DeleteResult, import("mongoose").Document<unknown, {}, Product> & Product & Required<{
-        _id: unknown;
-    }>, {}, Product, "deleteOne", {}>;
+import { HydratedDocument } from 'mongoose';
+export type ProductsDocument = HydratedDocument<Product>;
+export declare class Product {
+    name: string;
+    value: number;
+    quant: number;
 }
+export declare const ProductsSchema: import("mongoose").Schema<Product, import("mongoose").Model<Product, any, any, any, import("mongoose").Document<unknown, any, Product> & Product & {
+    _id: import("mongoose").Types.ObjectId;
+}, any>, {}, {}, {}, {}, import("mongoose").DefaultSchemaOptions, Product, import("mongoose").Document<unknown, {}, import("mongoose").FlatRecord<Product>> & import("mongoose").FlatRecord<Product> & {
+    _id: import("mongoose").Types.ObjectId;
+}>;

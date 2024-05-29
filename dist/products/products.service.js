@@ -5,28 +5,47 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsService = void 0;
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
+const product_entity_1 = require("./entities/product.entity");
+const mongoose_2 = require("mongoose");
 let ProductsService = class ProductsService {
-    create(createProductDto) {
-        return 'This action adds a new product';
+    constructor(productModel) {
+        this.productModel = productModel;
     }
-    findAll() {
-        return `This action returns all products`;
+    async create(createProductDto) {
+        const createProduct = await this.productModel.create(createProductDto);
+        return createProduct;
     }
-    findOne(id) {
-        return `This action returns a #${id} product`;
+    async findAll() {
+        const allProduct = await this.productModel.find();
+        return allProduct;
     }
-    update(id, updateProductDto) {
-        return `This action updates a #${id} product`;
+    async findOne(id) {
+        const findedProduct = await this.productModel.findById(id);
+        return findedProduct;
+    }
+    async update(id, updateProductDto) {
+        const newProduct = await this.productModel.findByIdAndUpdate(id);
+        return newProduct;
     }
     remove(id) {
-        return `This action removes a #${id} product`;
+        const deletedProduct = this.productModel.deleteOne({ id: id });
+        return deletedProduct;
     }
 };
 exports.ProductsService = ProductsService;
 exports.ProductsService = ProductsService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)(product_entity_1.Product.name)),
+    __metadata("design:paramtypes", [mongoose_2.Model])
 ], ProductsService);
 //# sourceMappingURL=products.service.js.map
